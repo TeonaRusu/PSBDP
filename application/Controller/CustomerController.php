@@ -13,7 +13,7 @@ class CustomerController
 	    $title = '';
         $customer = new Customer();
 
-        $customer = $customer->get_all();
+        $customers = $customer->get_customers();
 
         require APP . 'view/_templates/header.php';
         require APP . 'view/customer/list.php';

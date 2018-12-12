@@ -1,51 +1,10 @@
-insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values 
-(1, 'flinnitt0', 'Franky', 'Linnitt', '924-109-6789', 'flinnitt0@discovery.com', '$1419.80', '2/18/2011', 5),
-(2, 'mshelley1', 'Marline', 'Shelley', '323-627-0800', 'mshelley1@mapy.cz', '$4818.76', '10/18/2010', 1),
-(3, 'msellen2', 'Meghan', 'Sellen', '141-363-7830', 'msellen2@1688.com', '$1330.55', '7/4/2000', 3),
-(4, 'ebenley3', 'Efren', 'Benley', '482-580-2105', 'ebenley3@harvard.edu', '$4155.87', '4/12/2015', 5),
-(5, 'blapslie4', 'Bartholomeus', 'Lapslie', '584-296-1968', 'blapslie4@instagram.com', '$4581.66', '7/15/2013', 6),
-(6, 'dlengthorn5', 'Diahann', 'Lengthorn', '507-678-1733', 'dlengthorn5@umich.edu', '$3940.67', '3/18/2003', 3),
-(7, 'sohollegan6', 'Sigismondo', 'O''Hollegan', '811-600-0368', 'sohollegan6@reverbnation.com', '$2116.45', '10/28/2000', 3),
-(8, 'dpitkeathley7', 'Durant', 'Pitkeathley', '120-526-4512', 'dpitkeathley7@dell.com', '$4377.20', '1/30/2008', 5),
-(9, 'kmaydway8', 'Kirby', 'Maydway', '398-103-9450', 'kmaydway8@rakuten.co.jp', '$1384.61', '6/9/2004', 4),
-(10, 'clemasney9', 'Claire', 'Lemasney', '838-292-7437', 'clemasney9@google.co.uk', '$4727.23', '5/21/2017', 1),
-(11, 'plimpertza', 'Peria', 'Limpertz', '919-383-3416', 'plimpertza@joomla.org', '$1763.62', '5/3/2001', 2),
-(12, 'mklamptb', 'Marja', 'Klampt', '603-616-0253', 'mklamptb@tumblr.com', '$2480.68', '10/22/2015', 3),
-(13, 'lbaltzarc', 'Loydie', 'Baltzar', '797-725-3558', 'lbaltzarc@cam.ac.uk', '$1823.65', '3/26/2018', 1),
-(14, 'pdould', 'Philly', 'Doul', '179-433-9401', 'pdould@eventbrite.com', '$4700.18', '5/5/2014', 1),
-(15, 'ltyase', 'Lorie', 'Tyas', '445-659-1985', 'ltyase@netlog.com', '$3644.52', '9/4/2001', 5),
-(16, 'crudlandf', 'Chaddy', 'Rudland', '347-692-8638', 'crudlandf@sakura.ne.jp', '$3510.17', '7/7/2015', 1),
-(17, 'amanssuerg', 'Angelique', 'Manssuer', '783-463-6020', 'amanssuerg@tinypic.com', '$2048.25', '12/17/2016', 7),
-(18, 'mcruikshankh', 'Merilee', 'Cruikshank', '532-436-0085', 'mcruikshankh@sfgate.com', '$1377.35', '12/17/2012', 3),
-(19, 'oferrandi', 'Ofilia', 'Ferrand', '884-842-5393', 'oferrandi@sun.com', '$2512.21', '8/15/2012', 6),
-(20, 'rjenkinj', 'Rafe', 'Jenkin', '135-864-6962', 'rjenkinj@vistaprint.com', '$2763.81', '3/8/2015', 3),
-(21, 'dwilloughleyk', 'Duffy', 'Willoughley', '594-300-7796', 'dwilloughleyk@drupal.org', '$1882.31', '9/12/2003', 1),
-(22, 'mleggl', 'Matilde', 'Legg', '286-333-8573', 'mleggl@simplemachines.org', '$2322.40', '12/25/2004', 6),
-(23, 'pchappellem', 'Pinchas', 'Chappelle', '126-672-5204', 'pchappellem@eepurl.com', '$1470.11', '2/3/2000', 5),
-(24, 'mstollhofern', 'Mayne', 'Stollhofer', '470-987-4546', 'mstollhofern@mayoclinic.com', '$1553.60', '3/1/2017', 4),
-(25, 'ncoulthardo', 'Norby', 'Coulthard', '164-358-2928', 'ncoulthardo@mlb.com', '$2304.71', '7/6/2001', 1),
-(26, 'bbannellp', 'Bernardo', 'Bannell', '344-139-8566', 'bbannellp@admin.ch', '$3924.64', '1/19/2009', 2),
-(27, 'bgarvieq', 'Brandon', 'Garvie', '149-504-8223', 'bgarvieq@xinhuanet.com', '$4110.28', '8/3/2015', 6),
-(28, 'dshaxbyr', 'Darda', 'Shaxby', '434-995-6532', 'dshaxbyr@technorati.com', '$4469.51', '10/5/2016', 3),
-(29, 'bmelluishs', 'Betsy', 'Melluish', '417-409-1039', 'bmelluishs@jalbum.net', '$3853.01', '6/13/2009', 7),
-(30, 'sswinburnt', 'Susette', 'Swinburn', '617-314-9938', 'sswinburnt@nationalgeographic.com', '$942.29', '12/20/2006', 2),
-(31, 'kcaulieru', 'Katrinka', 'Caulier', '790-734-8429', 'kcaulieru@friendfeed.com', '$3868.34', '3/10/2016', 1),
-(32, 'tsalvidgev', 'Timofei', 'Salvidge', '149-932-4873', 'tsalvidgev@psu.edu', '$2754.88', '7/22/2009', 7),
-(33, 'hprayw', 'Hugues', 'Pray', '117-767-7087', 'hprayw@elpais.com', '$3093.66', '10/7/2001', 3),
-(34, 'tberzonx', 'Timmie', 'Berzon', '801-374-7684', 'tberzonx@usda.gov', '$3465.51', '2/28/2011', 6),
-(35, 'rkelly', 'Rochella', 'Kell', '716-738-3723', 'rkelly@furl.net', '$4474.60', '8/23/2017', 1),
-(36, 'dfredaz', 'Danya', 'Freda', '913-977-2593', 'dfredaz@census.gov', '$2618.95', '4/24/2002', 1),
-(37, 'pwillett10', 'Peder', 'Willett', '703-112-0235', 'pwillett10@cnn.com', '$2360.15', '6/15/2008', 3),
-(38, 'dstafford11', 'Danna', 'Stafford', '269-305-6417', 'dstafford11@github.io', '$2596.60', '4/13/2018', 4),
-(39, 'keburah12', 'Kent', 'Eburah', '240-347-1920', 'keburah12@latimes.com', '$3798.64', '8/1/2007', 7),
-(40, 'chandforth13', 'Christa', 'Handforth', '364-807-3268', 'chandforth13@oakley.com', '$1781.93', '3/22/2000', 6),
-(41, 'kearie14', 'Kamila', 'Earie', '431-955-7030', 'kearie14@drupal.org', '$2403.23', '2/4/2008', 1),
-(42, 'mleatherborrow15', 'Moss', 'Leatherborrow', '907-867-2718', 'mleatherborrow15@xrea.com', '$3209.29', '3/24/2000', 1),
-(43, 'mroll16', 'Mariquilla', 'Roll', '595-874-4108', 'mroll16@umich.edu', '$4238.48', '4/26/2002', 6),
-(44, 'jcroysdale17', 'Jeremiah', 'Croysdale', '697-229-2685', 'jcroysdale17@yolasite.com', '$2787.60', '11/13/2016', 5),
-(45, 'blammin18', 'Brnaba', 'Lammin', '662-139-8902', 'blammin18@tuttocitta.it', '$2081.91', '6/2/2007', 6),
-(46, 'wgabby19', 'Whittaker', 'Gabby', '360-398-9358', 'wgabby19@uiuc.edu', '$2118.61', '5/19/2004', 2),
-(47, 'bemps1a', 'Betti', 'Emps', '650-846-8957', 'bemps1a@gov.uk', '$900.09', '3/20/2000', 1),
-(48, 'ckilgallon1b', 'Creigh', 'Kilgallon', '937-394-8283', 'ckilgallon1b@unblog.fr', '$2729.22', '9/9/2010', 2),
-(49, 'wgrzeszczak1c', 'Wilbert', 'Grzeszczak', '426-630-6220', 'wgrzeszczak1c@latimes.com', '$4240.16', '11/10/2015', 5),
-(50, 'nmackriell1d', 'Niccolo', 'Mackriell', '554-654-3997', 'nmackriell1d@addthis.com', '$1199.83', '4/11/2015', 7);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (1, 'flinnitt0', 'Franky', 'Linnitt', '9241096789', 'flinnitt0@discovery.com', '1419', '12-OCT-2011', 1);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (2, 'mshelley1', 'Marline', 'Shelley', '3236270800', 'mshelley1@mapy.cz', '4818', '18-OCT-2010', 1);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (3, 'msellen2', 'Meghan', 'Sellen', '1413637830', 'msellen2@1688.com', '1330', '04-JUL-2000', 3);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (4, 'ebenley3', 'Efren', 'Benley', '4825802105', 'ebenley3@harvard.edu', '4155', '12-APR-2015', 2);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (5, 'clemasney9', 'Claire', 'Lemasney', '8382927437', 'clemasney9@google.co.uk', '4727', '21-MAY-2017', 4);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (6, 'plimpertza', 'Peria', 'Limpertz', '9193833416', 'plimpertza@joomla.org', '1767', '03-MAY-2001', 4);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (7, 'mklamptb', 'Marja', 'Klampt', '6036160253', 'mklamptb@tumblr.com', '2480', '22-OCT-2015', 4);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (8, 'lbaltzarc', 'Loydie', 'Baltzar', '7977253558', 'lbaltzarc@cam.ac.uk', '1823', '26-MAR-2018', 5);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (9, 'pdould', 'Philly', 'Doul', '1794339401', 'pdould@eventbrite.com', '4700', '05-JAN-2014', 6);
+insert into EMPLOYEE (emp_id, emp_username, emp_fname, emp_lname, emp_phone, emp_email, emp_salary, emp_hiredate, dept_id) values (10, 'ltyase', 'Lorie', 'Tyas', '4456591985', 'ltyase@netlog.com', '3644', '04-SEP-2001', 7);

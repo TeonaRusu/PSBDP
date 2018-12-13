@@ -12,7 +12,7 @@ class EmployeeController
         $page = '';
 	    $title = '';
         $employee = new Employee();
-        $employees = $employee->get_all();
+        $employees = $employee->get_employees();
 
         require APP . 'view/_templates/header.php';
         require APP . 'view/employee/list.php';

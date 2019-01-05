@@ -51,8 +51,6 @@ table th {
 					<td><?php echo $r['ROOM_NUMBER'] ?></td>
 					<td>
 						<a href="<?php echo URL; ?>reservation/edit/<?php echo $r['RSV_ID'] ?>">Edit</a>
-						<a href="">Remove</a>
-						<a href="">Details</a>
 					</td>
 				</tr>
 				<?php

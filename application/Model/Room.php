@@ -5,68 +5,61 @@ use Mini\Core\Model;
 
 class Room extends Model {
 
-    function get_room_types()
+	function get_room($room_nr) {
+		
+		$conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+        if (!$conn) {
+            $e = oci_error();
+            trigger_error(htmlentities($e['message']), E_USER_ERROR);
+        }
+		$curs = oci_new_cursor($conn);
+        $stid = oci_parse($conn, "begin GET_ROOM_DETAILS(:room_nr, :cursbv); end;");
+		oci_bind_by_name($stid, ":cursbv", $curs, -1, OCI_B_CURSOR);
+        oci_bind_by_name($stid, ":room_nr", $room_nr);
+		oci_execute($stid);
+        oci_execute($curs);  // Execute the REF CURSOR like a normal statement id
+        while (($row = oci_fetch_array($curs, OCI_ASSOC+OCI_RETURN_NULLS)) != false) {
+			$room = array('ROOM_NUMBER' => $row['ROOM_NUMBER'], 'ROOM_TYPE' => $row['ROOM_TYPE'], 'ROOM_PRICE' => $row['ROOM_PRICE'],'ROOM_DETAILS' => $row['ROOM_DETAILS']);
+			break;
+		}
+
+		oci_free_statement($stid);
+		oci_free_statement($curs);
+		oci_close($conn);
+		return $room;
+	}
+
+    function get_available_rooms($checkin, $checkout)
     {
-        $sql = "SELECT `type_id`, `room_type`,  `room_price`, `room_details` FROM `room_type`";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        return $query->fetchAll();
-    }
+        $rooms = array();
+        $temp = array('' => '');
 
-    function get_room_price($room_type){
-        $sql = "SELECT `room_price` FROM `room_type` WHERE `type_id`=:room_type";
-        $query = $this->db->prepare($sql);
-        $parameters = array(':room_type' => $room_type);
-        $query->execute($parameters);
-        return $query->fetch();
-    }
+        //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+        $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+        if (!$conn) {
+            $e = oci_error();
+            trigger_error(htmlentities($e['message']), E_USER_ERROR);
+        }
 
-    function get_rooms()
-    {
-        $sql = "SELECT `room`.room_id, `room_type`.room_type,
-                       `room_type`.`room_price`, `room_type`.`room_details`
-                FROM `room`
-                INNER JOIN `room_type` ON `room`.`room_type`=`room_type`.`type_id`
-                ORDER BY `room`.`room_type`, `room`.`room_id`";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        return $query->fetchAll();
-    }
+		
+        //$checkin = '11-APR-06';
+        //$checkout = '17-APR-06';
+        $curs = oci_new_cursor($conn);
+        $stid = oci_parse($conn, "begin GET_AVAILABLE_ROOMS(:checkin, :checkout, :cursbv); end;");
+        oci_bind_by_name($stid, ":cursbv", $curs, -1, OCI_B_CURSOR);
+        oci_bind_by_name($stid, ":checkin", $checkin);
+        oci_bind_by_name($stid, ":checkout", $checkout);
+        oci_execute($stid);
+        oci_execute($curs);  // Execute the REF CURSOR like a normal statement id
+        while (($row = oci_fetch_array($curs, OCI_ASSOC+OCI_RETURN_NULLS)) != false) {
+        $temp = array('ROOM_NUMBER' => $row['ROOM_NUMBER'], 'ROOM_TYPE' => $row['ROOM_TYPE'], 'ROOM_PRICE' => $row['ROOM_PRICE'],'ROOM_DETAILS' => $row['ROOM_DETAILS']);
+        array_push($rooms, $temp);
+      }
 
-    function get_rooms_by_type($room_type)
-    {
-        $sql = "SELECT `room`.room_id, `room_type`.room_type,
-                       `room_type`.`room_price`, `room_type`.`room_details`
-                FROM `room`
-                INNER JOIN `room_type` ON `room`.`room_type`=`room_type`.`type_id`
-                WHERE `room`.`room_type`=:room_type
-                ORDER BY `room`.`room_type`, `room`.`room_id`";
-        $query = $this->db->prepare($sql);
-        $parameters = array(':room_type' => $room_type);
-        $query->execute($parameters);
-        return $query->fetchAll();
-    }
-
-    function get_available_rooms($room_type, $checkin_date, $checkout_date) {
-        $sql = "SELECT `available_rooms`.`room_id`
-                FROM `room` AS `available_rooms`
-                WHERE `available_rooms`.`room_type`=:room_type 
-                AND `available_rooms`.`room_id`
-                AND 0 = (
-                    SELECT COUNT(1)
-                    FROM `reservation` AS `reservation`
-                    WHERE `reservation`.`room_id` = `available_rooms`.`room_id`
-                    AND NOT (:checkin_date < `reservation`.`checkin_date` AND :checkout_date <= `reservation`.`checkin_date`)
-                    AND NOT (:checkin_date >= `reservation`.`checkout_date` AND :checkout_date > `reservation`.`checkout_date`)
-                    LIMIT 1
-                )";
-        $query = $this->db->prepare($sql);
-        $parameters = array(
-            ':room_type'     => $room_type,
-            ':checkin_date'  => $checkin_date,
-            ':checkout_date' => $checkout_date,
-        );
-        $query->execute($parameters);
-        return $query->fetchAll();
+      oci_free_statement($stid);
+      oci_free_statement($curs);
+      oci_close($conn);
+      
+      return $rooms;
     }
 }

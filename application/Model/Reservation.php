@@ -101,11 +101,9 @@ function add_reservation($checkin, $checkout, $date, $price, $status, $cust_id, 
           trigger_error(htmlentities($e['message']), E_USER_ERROR);
         }
       
-      $stid = oci_parse($conn, "begin ADD_RESERVATION(:checkin, :checkout, :date, :price, :status, :cust_id, :emp_id, :room_nr); end;");
-      oci_bind_by_name($stid, ":rsvid", $rsv_id, 255);
+      $stid = oci_parse($conn, "begin ADD_RESERVATION(:checkin, :checkout, :price, :status, :cust_id, :emp_id, :room_nr); end;");
       oci_bind_by_name($stid, ":checkin", $checkin);
       oci_bind_by_name($stid, ":checkout", $checkout);
-      oci_bind_by_name($stid, ":date", $date);
       oci_bind_by_name($stid, ":price", $price, 255);
       oci_bind_by_name($stid, ":status", $status);
       oci_bind_by_name($stid, ":cust_id", $cust_id, 255);
@@ -114,6 +112,7 @@ function add_reservation($checkin, $checkout, $date, $price, $status, $cust_id, 
       oci_execute($stid, OCI_COMMIT_ON_SUCCESS);
       oci_free_statement($stid);
       oci_close($conn);
+	}
 }
 
 ?>

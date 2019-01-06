@@ -3,6 +3,8 @@
 namespace Mini\Controller;
 
 use Mini\Model\Room;
+use Mini\Model\Employee;
+use Mini\Model\Customer;
 
 class RoomController
 {
@@ -11,13 +13,9 @@ class RoomController
     {
         $page = '';
 	    $title = '';
-        $room = new Room();
-
-        $rooms = $room->get_rooms();
-        $room_types = $room->get_room_types();
 
         require APP . 'view/_templates/header.php';
-        require APP . 'view/room/list.php';
+        require APP . 'view/room/form.php';
         require APP . 'view/_templates/footer.php';
     }
 	public function list_available_rooms()

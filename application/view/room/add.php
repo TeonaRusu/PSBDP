@@ -58,7 +58,13 @@ a.button {
         </div>
         <div class="form-row">
           <label>Price</label>
-          <input id="rsv_price" class="form-control" type="text" name="RSV_PRICE" value="<?php echo $room['ROOM_PRICE']; ?>" required />
+		  <?php
+			$date_checkin = date_create($checkin);
+			$date_checkout = date_create($checkout);
+			$diff = date_diff($date_checkout, $date_checkin);
+			$days = $diff->format('%a');
+			?>
+			<input id="rsv_price" class="form-control" type="text" name="RSV_PRICE" value="<?php echo $room['ROOM_PRICE'] * $days; ?>" required />
         </div>
     </div>
 
@@ -66,9 +72,9 @@ a.button {
        <div class="form-row">
       <label>Status</label>
       <select name="RSV_STATUS" class="form-control">
-        <option value="OPEN">Open</option>
-        <option value="INPROGRESS">In Progress</option>
-        <option value="DONE">Done</option>
+        <option value="OPEN">OPEN</option>
+        <option value="INPROGRESS">IN PROGRESS</option>
+        <option value="DONE">DONE</option>
       </select>
       <!--<input id="rsv_status" class="form-control" type="text" name="RSV_STATUS" value="<?php echo $reservation_details['RSV_STATUS']; ?>" required />-->
         </div>

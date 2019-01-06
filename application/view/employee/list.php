@@ -32,7 +32,6 @@ table th {
 			<th>Employee Salary</th>	
 			<th>Employee Hiredate</th>	
 			<th>Department #ID</th>	
-			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -49,11 +48,6 @@ table th {
 					<td><?php echo $e['EMP_SALARY'] ?></td>
 					<td><?php echo $e['EMP_HIREDATE'] ?></td>
 					<td><?php echo $e['DEPT_ID'] ?></td>
-					<td>
-						<a href="">Edit</a>
-						<a href="">Remove</a>
-						<a href="">Details</a>
-					</td>
 				</tr>
 				<?php
 				

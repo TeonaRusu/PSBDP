@@ -67,7 +67,7 @@ class Reservation extends Model {
     }
 
 
-function update_reservation($rsv_id, $checkin, $checkout, $date, $price, $status, $emp_id, $room_nr)
+function update_reservation($rsv_id, $status, $emp_id)
     {
       //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
       $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
@@ -76,23 +76,16 @@ function update_reservation($rsv_id, $checkin, $checkout, $date, $price, $status
           trigger_error(htmlentities($e['message']), E_USER_ERROR);
         }
       
-      $stid = oci_parse($conn, "begin UPDATE_RESERVATION(:rsvid, :checkin, :checkout, :date, :price, :status, :emp_id, :room_nr); end;");
+      $stid = oci_parse($conn, "begin UPDATE_RESERVATION(:rsvid, :status, :emp_id); end;");
       oci_bind_by_name($stid, ":rsvid", $rsv_id, 255);
-      oci_bind_by_name($stid, ":checkin", $checkin);
-      oci_bind_by_name($stid, ":checkout", $checkout);
-      oci_bind_by_name($stid, ":date", $date);
-      oci_bind_by_name($stid, ":price", $price, 255);
       oci_bind_by_name($stid, ":status", $status);
-      //oci_bind_by_name($stid, ":cust_id", $cust_id, 255);
       oci_bind_by_name($stid, ":emp_id", $emp_id, 255);
-      oci_bind_by_name($stid, ":room_nr", $room_nr, 255);
       oci_execute($stid, OCI_COMMIT_ON_SUCCESS);
       oci_free_statement($stid);
       oci_close($conn);
     }
-}
 
-function add_reservation($checkin, $checkout, $date, $price, $status, $cust_id, $emp_id, $room_nr)
+function add_reservation($checkin, $checkout, $price, $status, $cust_id, $emp_id, $room_nr)
     {
       //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
       $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
@@ -112,6 +105,17 @@ function add_reservation($checkin, $checkout, $date, $price, $status, $cust_id, 
       oci_execute($stid, OCI_COMMIT_ON_SUCCESS);
       oci_free_statement($stid);
       oci_close($conn);
+	}
+	
+function check_date($rsv_id, $checkout)
+	{
+		//$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+		$conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+		if (!$conn) {
+          $e = oci_error();
+          trigger_error(htmlentities($e['message']), E_USER_ERROR);
+        }
+		
 	}
 }
 

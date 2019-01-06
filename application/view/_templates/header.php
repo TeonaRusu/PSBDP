@@ -57,6 +57,9 @@
                         <li>
                             <a href="<?php echo URL; ?>reservation"><i class="fas fa-table fa-fw"></i>Reservations</a>
                         </li>
+						<li>
+                            <a href="<?php echo URL; ?>room"><i class="fas fa-suitcase-rolling fa-fw"></i>Room</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

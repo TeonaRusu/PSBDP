@@ -28,7 +28,6 @@ table th {
 			<th>Customer Lname</th>
 			<th>Customer Phone</th>	
 			<th>Customer Email</th>	
-			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -41,11 +40,6 @@ table th {
 					<td><?php echo $c['CUSTOMER_LNAME'] ?></td>
 					<td><?php echo $c['CUSTOMER_PHONE'] ?></td>
 					<td><?php echo $c['CUSTOMER_EMAIL'] ?></td>
-					<td>
-						<a href="">Edit</a>
-						<a href="">Remove</a>
-						<a href="">Details</a>
-					</td>
 				</tr>
 				<?php
 				

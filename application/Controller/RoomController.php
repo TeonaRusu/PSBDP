@@ -24,13 +24,28 @@ class RoomController
     {
 		$room = new Room();
 		$rooms = array();
+		$today = date('d-M-y');
+		$error = "";
+		
 		if(!empty($_POST)){
-			$rooms = $room->get_available_rooms($_POST['CHECKIN_DATE'], $_POST['CHECKOUT_DATE']);
+			$checkin_d = date('d-M-y', strtotime($_POST['CHECKIN_DATE']));
+			$checkout_d = date('d-M-y', strtotime($_POST['CHECKOUT_DATE']));
+			if($checkin_d >= $checkout_d || $checkin_d < $today){
+				$error = "Incorrect dates!";
+				echo "<script type='text/javascript'>alert('$error');</script>";
+				
+				require APP . 'view/_templates/header.php';
+        		require APP . 'view/room/form.php';
+        		require APP . 'view/_templates/footer.php';
+			}
+			else{
+				$rooms = $room->get_available_rooms($checkin_d,$checkout_d);
+				require APP . 'view/_templates/header.php';
+				require APP . 'view/room/list.php';
+				require APP . 'view/_templates/footer.php';
+			}
 		}
 		
-        require APP . 'view/_templates/header.php';
-        require APP . 'view/room/list.php';
-        require APP . 'view/_templates/footer.php';
     }
 	
 	public function add($room_number, $checkin, $checkout)

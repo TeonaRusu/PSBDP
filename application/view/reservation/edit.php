@@ -2,7 +2,7 @@
 .header-sec{
     background: #346CE9;
    /* min-height: 40px;*/
-    border-radius: 5px;
+    border-radius: 2px;
     color: white;
     text-align: center;
     vertical-align: baseline;
@@ -12,7 +12,7 @@
     padding: 1px;
     border: 0;
     outline: 0;
-    font-size: 90%;
+    font-size: 75%;
 }
 .form-row {
     margin: 0 0 15px 0;
@@ -44,10 +44,10 @@ a.button {
 </style>
 <div class="date-form">
   <div class="header-sec">
-    <h3> Reservation details</h3>
+    <h4> Reservation details</h4>
   </div>
   <form method="POST" action="#" >
-    <div style="width: 50%; float:left; background-color:#fefefe; height: 400px; padding-left: 15px;">
+    <div style="width: 48%; float:left; background-color:#fefefe; height: 400px; margin-top:10px;">
         <div class="form-row">
           <label>ID</label>
           <input id="rsv_id" class="form-control" type="text" name="RSV_ID" value="<?php echo $reservation_details['RSV_ID']; ?>" required />
@@ -56,11 +56,10 @@ a.button {
           <label>Checkin-date</label>
           <input id="checkin_date" class="form-control" type="text" name="CHECKIN_DATE" value="<?php echo $reservation_details['CHECKIN_DATE']; ?>" required />
         </div>
-		<div class="form-row">
+        <div class="form-row">
           <label>Checkout-date</label>
           <input id="checkout_date" class="form-control" type="text" name="CHECKOUT_DATE" value="<?php echo $reservation_details['CHECKOUT_DATE']; ?>" required />
         </div>
-		
         <div class="form-row">
           <label>Reservation day</label>
           <input id="rsv_date" class="form-control" type="text" name="RSV_DATE" value="<?php echo $reservation_details['RSV_DATE']; ?>" required />
@@ -71,7 +70,7 @@ a.button {
         </div>
     </div>
 
-     <div style="width: 50%; float:right; background-color:#fefefe; height: 400px; padding-left: 15px">
+    <div style="width: 50%; float:right; background-color:#fefefe; height: 400px; padding-left: 10px; margin-top:10px;">
        <div class="form-row">
           <label>Status</label>
           <input id="rsv_status" class="form-control" type="text" name="RSV_STATUS" value="<?php echo $reservation_details['RSV_STATUS']; ?>" required />
@@ -89,8 +88,8 @@ a.button {
           <input id="room_id" class="form-control" type="text" name="ROOM_NUMBER" value="<?php echo $reservation_details['ROOM_NUMBER']; ?>" required />
         </div>
     </div>
-    <input type="submit" name="SAVE" value="Save"/>
-	<a href="<?php echo URL; ?>reservation" class="button">Close Edit</a>
+    <input style="float:right;margin-top:5px;" class="btn btn-success" type="submit" name="SAVE" value="Save"/>
+    <a style="float:left;margin-top:5px;" href="<?php echo URL; ?>reservation" class="btn btn-danger">Close Edit</a>
   </form>
   <span id="msg-edit"></span>
 </div>

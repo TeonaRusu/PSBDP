@@ -2,7 +2,7 @@
 .header-sec{
     background: #346CE9;
    /* min-height: 40px;*/
-    border-radius: 5px;
+    border-radius: 2px;
     color: white;
     text-align: center;
     vertical-align: baseline;
@@ -12,7 +12,7 @@
     padding: 1px;
     border: 0;
     outline: 0;
-    font-size: 90%;
+    font-size: 75%;
 }
 .form-row {
     margin: 0 0 15px 0;
@@ -31,35 +31,22 @@
     line-height: 180%;
     box-sizing: border-box;
 }
-
-a.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-    text-decoration: none;
-    color: initial;
-	display: bottom;
-}
-
 </style>
 <div class="date-form">
-  <div class="header-sec">
-    <h3> Check Room Availability</h3>
+  <div style="width:50%;margin-left:25%;"class="header-sec">
+    <h4> Check Rooms Availability</h4>
   </div>
-   <div style="width: 50%; float:left; background-color:#fefefe; height: 400px; padding-left: 15px;">   
-		<form name="CHECK" method="POST" action="<?php echo URL; ?>room/list_available_rooms" >
-			<div class="form-row">
-			  <label>Checkin-date</label>
-			  <input id="checkin_date" class="form-control" type="text" name="CHECKIN_DATE" required />
-			</div>
-			<div class="form-row">
-			  <label>Checkout-date</label>
-			  <input id="checkout_date" class="form-control" type="text" name="CHECKOUT_DATE" required />
-			</div>
-			<div class="form-row">
-				<input type="submit" name="CHECK" value="Check"/>
-			</div>
-		</form>
-	</div>
+   <div style="width:50%;margin-left:25%; background-color:#fefefe; height: 400px; margin-top:10px;">   
+        <form name="CHECK" method="POST" action="<?php echo URL; ?>room/list_available_rooms" >
+            <div class="form-row">
+              <label>Checkin-date</label>
+              <input id="checkin_date" class="form-control" type="text" name="CHECKIN_DATE" required />
+            </div>
+            <div class="form-row">
+              <label>Checkout-date</label>
+              <input id="checkout_date" class="form-control" type="text" name="CHECKOUT_DATE" required />
+            </div>
+            <input style="float:right;margin-top:5px;"  class="btn btn-success" type="submit" name="CHECK" value="Check"/>
+        </form>
+    </div>
 </div>

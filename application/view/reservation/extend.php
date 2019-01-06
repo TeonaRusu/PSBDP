@@ -54,19 +54,19 @@ a.button {
         </div>
         <div class="form-row">
           <label>Checkin-date</label>
-          <input id="checkin_date" class="form-control" type="text" name="CHECKIN_DATE" disabled value="<?php echo $reservation_details['CHECKIN_DATE']; ?>" required />
+          <input id="checkin_date" class="form-control" type="text" name="CHECKIN_DATE" value="<?php echo $reservation_details['CHECKIN_DATE']; ?>" required />
         </div>
         <div class="form-row">
           <label>Checkout-date</label>
-          <input id="checkout_date" class="form-control" type="text" disabled name="CHECKOUT_DATE" value="<?php echo $reservation_details['CHECKOUT_DATE']; ?>" required />
+          <input id="checkout_date" class="form-control" type="text" name="CHECKOUT_DATE" value="<?php echo $reservation_details['CHECKOUT_DATE']; ?>" required />
         </div>
         <div class="form-row">
           <label>Reservation day</label>
-          <input id="rsv_date" class="form-control" type="text" disabled name="RSV_DATE" value="<?php echo $reservation_details['RSV_DATE']; ?>" required />
+          <input id="rsv_date" class="form-control" type="text" name="RSV_DATE" value="<?php echo $reservation_details['RSV_DATE']; ?>" required />
         </div>
         <div class="form-row">
           <label>Price</label>
-          <input id="rsv_price" class="form-control" type="text" disabled name="RSV_PRICE" value="<?php echo $reservation_details['RSV_PRICE']; ?>" required />
+          <input id="rsv_price" class="form-control" type="text" name="RSV_PRICE" value="<?php echo $reservation_details['RSV_PRICE']; ?>" required />
         </div>
     </div>
 
@@ -82,7 +82,7 @@ a.button {
         </div>
         <div class="form-row">
           <label>Customer #ID</label>
-            <input id="customer_id" class="form-control" type="text" name="CUSTOMER_ID" disabled value="<?php echo $reservation_details['CUSTOMER_ID']; ?>" required />
+            <input id="customer_id" class="form-control" type="text" name="CUSTOMER_ID" value="<?php echo $reservation_details['CUSTOMER_ID']; ?>" required />
         </div>
         <div class="form-row">
           <label>Employee Username</label>
@@ -97,9 +97,29 @@ a.button {
         </div>
         <div class="form-row">
           <label>Room Number</label>
-          <input id="room_id" class="form-control" type="text" disabled name="ROOM_NUMBER" value="<?php echo $reservation_details['ROOM_NUMBER']; ?>" required />
+		  <?php
+		  
+			if($rooms){
+				?>
+				<select name="ROOM_NUMBER" class="form-control">
+				<option value="<?php echo $reservation_details['ROOM_NUMBER']; ?>" selected><?php echo $reservation_details['ROOM_NUMBER']; ?></option>
+				<?php
+				foreach($rooms as $room) {
+					echo '<option value="">'. $room['ROOM_NUMBER'] . '</option>';
+				}?>
+				</select>
+				<?php
+			}else{
+				?>
+				<input id="room_id" class="form-control" type="text" name="ROOM_NUMBER" value="<?php echo $reservation_details['ROOM_NUMBER']; ?>" required />
+			<?php
+			}
+			?>
+		   
+          <!--<input id="room_id" class="form-control" type="text" name="ROOM_NUMBER" value="<?php echo $reservation_details['ROOM_NUMBER']; ?>" required />-->
         </div>
     </div>
+	<!--<input style="float:right;margin-top:5px;" class="btn btn-success" type="submit" name="CHECK" value="Check"/>-->
     <input style="float:right;margin-top:5px;" class="btn btn-success" type="submit" name="SAVE" value="Save"/>
     <a style="float:left;margin-top:5px;" href="<?php echo URL; ?>reservation" class="btn btn-danger">Close Edit</a>
   </form>

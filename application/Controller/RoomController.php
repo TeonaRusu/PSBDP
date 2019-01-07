@@ -5,6 +5,7 @@ namespace Mini\Controller;
 use Mini\Model\Room;
 use Mini\Model\Employee;
 use Mini\Model\Customer;
+use Mini\Model\Reservation;
 
 class RoomController
 {
@@ -54,7 +55,7 @@ class RoomController
 		if(!empty($_POST))
 		{
 			$reservation_model = new Reservation();
-			$reservation_model->add_reservation($checkin, $checkout, $room['ROOM_PRICE'], $_POST['RSV_STATUS'],
+			$reservation_model->add_reservation($checkin, $checkout, $_POST['RSV_STATUS'],
 												$_POST['CUST_ID'], $_POST['EMP_ID'], $room_number);
 			header('Location: /reservation');
 		}

@@ -66,7 +66,7 @@ a.button {
         </div>
         <div class="form-row">
           <label>Price</label>
-          <input id="rsv_price" class="form-control" type="text" disabled name="RSV_PRICE" value="<?php echo $reservation_details['RSV_PRICE']; ?>" required />
+          <input id="rsv_price" class="form-control" type="text" disabled name="RSV_PRICE" value="<?php echo $reservation_details['TOTAL']; ?>" required />
         </div>
     </div>
 

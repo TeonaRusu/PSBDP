@@ -46,7 +46,7 @@ a.button {
   <div class="header-sec">
     <h4> Reservation details</h4>
   </div>
-  <form method="POST" action="#" >
+  <form method="POST" action="<?php echo URL; ?>reservation/extend/<?php echo $reservation_details['RSV_ID'] ?>" >
     <div style="width: 48%; float:left; background-color:#fefefe; height: 400px; margin-top:10px;">
         <div class="form-row">
           <label>ID</label>
@@ -54,19 +54,25 @@ a.button {
         </div>
         <div class="form-row">
           <label>Checkin-date</label>
-          <input id="checkin_date" class="form-control" type="text" name="CHECKIN_DATE" value="<?php echo $reservation_details['CHECKIN_DATE']; ?>" required />
+          <input id="checkin_date" class="form-control" type="text" name="CHECKIN_DATE" disabled value="<?php echo $reservation_details['CHECKIN_DATE']; ?>" required />
         </div>
         <div class="form-row">
           <label>Checkout-date</label>
-          <input id="checkout_date" class="form-control" type="text" name="CHECKOUT_DATE" value="<?php echo $reservation_details['CHECKOUT_DATE']; ?>" required />
+          <input id="checkout_date" class="form-control" type="text" name="CHECKOUT_DATE" value="<?php echo $checkout; ?>" required />
         </div>
         <div class="form-row">
           <label>Reservation day</label>
-          <input id="rsv_date" class="form-control" type="text" name="RSV_DATE" value="<?php echo $reservation_details['RSV_DATE']; ?>" required />
+          <input id="rsv_date" class="form-control" type="text" name="RSV_DATE" value="<?php echo $today; ?>" required />
         </div>
         <div class="form-row">
           <label>Price</label>
-          <input id="rsv_price" class="form-control" type="text" name="RSV_PRICE" value="<?php echo $reservation_details['RSV_PRICE']; ?>" required />
+          <?php
+            $date_checkin = date_create($reservation_details['CHECKIN_DATE']);
+            $date_checkout = date_create($checkout);
+            $diff = date_diff($date_checkout, $date_checkin);
+            $days = $diff->format('%a');
+			    ?>
+          <input id="total" class="form-control" type="text" name="TOTAL" value="<?php echo $room['ROOM_PRICE'] * $days; ?>" required />
         </div>
     </div>
 
@@ -82,7 +88,7 @@ a.button {
         </div>
         <div class="form-row">
           <label>Customer #ID</label>
-            <input id="customer_id" class="form-control" type="text" name="CUSTOMER_ID" value="<?php echo $reservation_details['CUSTOMER_ID']; ?>" required />
+            <input id="customer_id" class="form-control" type="text" name="CUSTOMER_ID" disabled value="<?php echo $reservation_details['CUSTOMER_ID']; ?>" required />
         </div>
         <div class="form-row">
           <label>Employee Username</label>
@@ -97,31 +103,11 @@ a.button {
         </div>
         <div class="form-row">
           <label>Room Number</label>
-		  <?php
-		  
-			if($rooms){
-				?>
-				<select name="ROOM_NUMBER" class="form-control">
-				<option value="<?php echo $reservation_details['ROOM_NUMBER']; ?>" selected><?php echo $reservation_details['ROOM_NUMBER']; ?></option>
-				<?php
-				foreach($rooms as $room) {
-					echo '<option value="">'. $room['ROOM_NUMBER'] . '</option>';
-				}?>
-				</select>
-				<?php
-			}else{
-				?>
-				<input id="room_id" class="form-control" type="text" name="ROOM_NUMBER" value="<?php echo $reservation_details['ROOM_NUMBER']; ?>" required />
-			<?php
-			}
-			?>
-		   
-          <!--<input id="room_id" class="form-control" type="text" name="ROOM_NUMBER" value="<?php echo $reservation_details['ROOM_NUMBER']; ?>" required />-->
+          <input id="room_id" class="form-control" type="text" name="ROOM_NUMBER" disabled value="<?php echo $reservation_details['ROOM_NUMBER']; ?>" required />
         </div>
     </div>
-	<!--<input style="float:right;margin-top:5px;" class="btn btn-success" type="submit" name="CHECK" value="Check"/>-->
     <input style="float:right;margin-top:5px;" class="btn btn-success" type="submit" name="SAVE" value="Save"/>
-    <a style="float:left;margin-top:5px;" href="<?php echo URL; ?>reservation" class="btn btn-danger">Close Edit</a>
+    <a style="float:left;margin-top:5px;" href="<?php echo URL; ?>reservation" class="btn btn-danger">Close Extend</a>
   </form>
   <span id="msg-edit"></span>
 </div>

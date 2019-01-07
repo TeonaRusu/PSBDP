@@ -44,7 +44,7 @@ table th {
 					<td><?php echo $r['CHECKIN_DATE'] ?></td>
 					<td><?php echo $r['CHECKOUT_DATE'] ?></td>
 					<td><?php echo $r['RSV_DATE'] ?></td>
-					<td><?php echo $r['RSV_PRICE'] ?></td>
+					<td><?php echo $r['TOTAL'] ?></td>
 					<td><?php echo $r['RSV_STATUS'] ?></td>
 					<td><?php echo $r['CUSTOMER_ID'] ?></td>
 					<td><?php echo $r['EMP_ID'] ?></td>

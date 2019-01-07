@@ -34,19 +34,19 @@
 </style>
 <div class="date-form">
   <div style="width:50%;margin-left:25%;"class="header-sec">
-    <h4> Check Room Availability</h4>
+    <h4> Check for other rooms </h4>
   </div>
    <div style="width:50%;margin-left:25%; background-color:#fefefe; height: 400px; margin-top:10px;">   
-        <form name="CHECK" method="POST" action="<?php echo URL; ?>reservation/check_extend_date/<?php echo $reservation_id ?>" >
-		<div class="form-row">
-              <label>Reservation ID</label>
-              <input id="rsv_id" class="form-control" type="text" name="RSV_ID" value="<?php echo $reservation_id; ?>"required />
-        </div>
-		<div class="form-row">
+        <form name="CHECK" method="POST" action="<?php echo URL; ?>room/list_available_rooms" >
+            <div class="form-row">
+              <label>Checkin-date</label>
+              <input id="checkin_date" class="form-control" type="text" name="CHECKIN_DATE" value="<?php echo $reservation_details['CHECKOUT_DATE']; ?>" required />
+            </div>
+            <div class="form-row">
               <label>Checkout-date</label>
-              <input id="checkout_date" class="form-control" type="text" name="CHECKOUT_DATE" required />
-        </div>
-        <input style="float:right;margin-top:5px;"  class="btn btn-success" type="submit" name="CHECK" value="Check"/>
+              <input id="checkout_date" class="form-control" type="text" name="CHECKOUT_DATE" value="<?php echo $checkout; ?>" required />
+            </div>
+            <input style="float:right;margin-top:5px;"  class="btn btn-success" type="submit" name="CHECK" value="Check"/>
         </form>
     </div>
 </div>

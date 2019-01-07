@@ -9,11 +9,12 @@
 CREATE TABLE Customer
   (
     customer_id    NUMBER NOT NULL ,
-    customer_fname VARCHAR2 (50) ,
-    customer_lname VARCHAR2 (50) ,
+    customer_fname VARCHAR2 (50) NOT NULL ,
+    customer_lname VARCHAR2 (50) NOT NULL ,
     customer_phone NUMBER ,
-    customer_email VARCHAR2 (20) NOT NULL
+    customer_email VARCHAR2 (50) NOT NULL
   ) ;
+ALTER TABLE Customer ADD CONSTRAINT customer_email_ck CHECK ( regexp_like(customer_email, '[a-z0-9._%-]+@[a-z0-9._%-]+\.[a-z]{2,4}')) ;
 ALTER TABLE Customer ADD CONSTRAINT Customer_PK PRIMARY KEY ( customer_id ) ;
 ALTER TABLE Customer ADD CONSTRAINT Customer_customer_email_UN UNIQUE ( customer_email ) ;
 
@@ -29,43 +30,48 @@ ALTER TABLE Department ADD CONSTRAINT Department_PK PRIMARY KEY ( dept_id ) ;
 CREATE TABLE Employee
   (
     emp_id       NUMBER NOT NULL ,
-    emp_username VARCHAR2 (50) ,
-    emp_fname    VARCHAR2 (50) ,
-    emp_lname    VARCHAR2 (50) ,
+    emp_username VARCHAR2 (50) NOT NULL ,
+    emp_fname    VARCHAR2 (50) NOT NULL ,
+    emp_lname    VARCHAR2 (50) NOT NULL ,
     emp_phone    NUMBER ,
     emp_email    VARCHAR2 (30) NOT NULL ,
     emp_salary   NUMBER ,
-    emp_hiredate DATE ,
+    emp_hiredate DATE NOT NULL ,
     dept_id      NUMBER NOT NULL
   ) ;
+ALTER TABLE Employee ADD CONSTRAINT emp_email_ck CHECK ( regexp_like(emp_email, '[a-z0-9._%-]+@[a-z0-9._%-]+\.[a-z]{2,4}')) ;
 ALTER TABLE Employee ADD CONSTRAINT Employee_PK PRIMARY KEY ( emp_id ) ;
-ALTER TABLE Employee ADD CONSTRAINT emp_email_UN UNIQUE ( emp_email ) ;
+ALTER TABLE Employee ADD CONSTRAINT Employee_emp_email_UN UNIQUE ( emp_email ) ;
+ALTER TABLE Employee ADD CONSTRAINT Employee_emp_username_UN UNIQUE ( emp_username ) ;
+
+
+CREATE TABLE Price
+  (
+    price_id NUMBER NOT NULL ,
+    rsv_id   NUMBER NOT NULL ,
+    nr_days  NUMBER ,
+    total    NUMBER NOT NULL
+  ) ;
+ALTER TABLE Price ADD CONSTRAINT Price_PK PRIMARY KEY ( price_id ) ;
 
 
 CREATE TABLE Reservation
   (
     rsv_id        NUMBER NOT NULL ,
-    checkin_date  DATE ,
-    checkout_date DATE ,
+    checkin_date  DATE NOT NULL ,
+    checkout_date DATE NOT NULL ,
     rsv_date      DATE ,
     rsv_price     NUMBER ,
-    rsv_status    VARCHAR2 (20) ,
+    rsv_status    VARCHAR2 (20) NOT NULL ,
     customer_id   NUMBER NOT NULL ,
     emp_id        NUMBER NOT NULL ,
     room_number   NUMBER NOT NULL
   ) ;
-CREATE UNIQUE INDEX Reservation__IDX ON Reservation
-  (
-    room_number ASC
-  )
-  ;
 ALTER TABLE Reservation ADD CONSTRAINT Reservation_PK PRIMARY KEY ( rsv_id ) ;
 
 
 CREATE TABLE Room
-  (
-    room_number NUMBER NOT NULL ,
-    roomtype_id NUMBER NOT NULL
+  ( room_number NUMBER NOT NULL , type_id NUMBER NOT NULL
   ) ;
 ALTER TABLE Room ADD CONSTRAINT Room_PK PRIMARY KEY ( room_number ) ;
 
@@ -73,8 +79,8 @@ ALTER TABLE Room ADD CONSTRAINT Room_PK PRIMARY KEY ( room_number ) ;
 CREATE TABLE Room_Type
   (
     type_id      NUMBER NOT NULL ,
-    room_type    VARCHAR2 (20) ,
-    room_price   NUMBER ,
+    room_type    VARCHAR2 (20) NOT NULL ,
+    room_price   NUMBER NOT NULL ,
     room_details VARCHAR2 (100)
   ) ;
 ALTER TABLE Room_Type ADD CONSTRAINT Room_Type_PK PRIMARY KEY ( type_id ) ;
@@ -82,27 +88,59 @@ ALTER TABLE Room_Type ADD CONSTRAINT Room_Type_PK PRIMARY KEY ( type_id ) ;
 
 ALTER TABLE Employee ADD CONSTRAINT Employee_Department_FK FOREIGN KEY ( dept_id ) REFERENCES Department ( dept_id ) ;
 
+ALTER TABLE Price ADD CONSTRAINT Price_Reservation_FK FOREIGN KEY ( rsv_id ) REFERENCES Reservation ( rsv_id ) ;
+
 ALTER TABLE Reservation ADD CONSTRAINT Reservation_Customer_FK FOREIGN KEY ( customer_id ) REFERENCES Customer ( customer_id ) ;
 
 ALTER TABLE Reservation ADD CONSTRAINT Reservation_Employee_FK FOREIGN KEY ( emp_id ) REFERENCES Employee ( emp_id ) ;
 
 ALTER TABLE Reservation ADD CONSTRAINT Reservation_Room_FK FOREIGN KEY ( room_number ) REFERENCES Room ( room_number ) ;
 
-ALTER TABLE Room ADD CONSTRAINT Room_Room_Type_FK FOREIGN KEY ( roomtype_id ) REFERENCES Room_Type ( type_id ) ;
+ALTER TABLE Room ADD CONSTRAINT Room_Room_Type_FK FOREIGN KEY ( type_id ) REFERENCES Room_Type ( type_id ) ;
+
+CREATE SEQUENCE Customer_customer_id_SEQ START WITH 1 NOCACHE ORDER ;
+CREATE OR REPLACE TRIGGER Customer_customer_id_TRG BEFORE
+  INSERT ON Customer FOR EACH ROW WHEN (NEW.customer_id IS NULL) BEGIN :NEW.customer_id := Customer_customer_id_SEQ.NEXTVAL;
+END;
+/
+
+CREATE SEQUENCE Department_dept_id_SEQ START WITH 1 NOCACHE ORDER ;
+CREATE OR REPLACE TRIGGER Department_dept_id_TRG BEFORE
+  INSERT ON Department FOR EACH ROW WHEN (NEW.dept_id IS NULL) BEGIN :NEW.dept_id := Department_dept_id_SEQ.NEXTVAL;
+END;
+/
+
+CREATE SEQUENCE Employee_emp_id_SEQ START WITH 1 NOCACHE ORDER ;
+CREATE OR REPLACE TRIGGER Employee_emp_id_TRG BEFORE
+  INSERT ON Employee FOR EACH ROW WHEN (NEW.emp_id IS NULL) BEGIN :NEW.emp_id := Employee_emp_id_SEQ.NEXTVAL;
+END;
+/
+
+CREATE SEQUENCE Reservation_rsv_id_SEQ START WITH 1 NOCACHE ORDER ;
+CREATE OR REPLACE TRIGGER Reservation_rsv_id_TRG BEFORE
+  INSERT ON Reservation FOR EACH ROW WHEN (NEW.rsv_id IS NULL) BEGIN :NEW.rsv_id := Reservation_rsv_id_SEQ.NEXTVAL;
+END;
+/
+
+CREATE SEQUENCE Room_Type_type_id_SEQ START WITH 1 NOCACHE ORDER ;
+CREATE OR REPLACE TRIGGER Room_Type_type_id_TRG BEFORE
+  INSERT ON Room_Type FOR EACH ROW WHEN (NEW.type_id IS NULL) BEGIN :NEW.type_id := Room_Type_type_id_SEQ.NEXTVAL;
+END;
+/
 
 
 -- Oracle SQL Developer Data Modeler Summary Report: 
 -- 
--- CREATE TABLE                             6
--- CREATE INDEX                             1
--- ALTER TABLE                             13
+-- CREATE TABLE                             7
+-- CREATE INDEX                             0
+-- ALTER TABLE                             18
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
 -- CREATE PACKAGE                           0
 -- CREATE PACKAGE BODY                      0
 -- CREATE PROCEDURE                         0
 -- CREATE FUNCTION                          0
--- CREATE TRIGGER                           0
+-- CREATE TRIGGER                           5
 -- ALTER TRIGGER                            0
 -- CREATE COLLECTION TYPE                   0
 -- CREATE STRUCTURED TYPE                   0
@@ -115,7 +153,7 @@ ALTER TABLE Room ADD CONSTRAINT Room_Room_Type_FK FOREIGN KEY ( roomtype_id ) RE
 -- CREATE DISK GROUP                        0
 -- CREATE ROLE                              0
 -- CREATE ROLLBACK SEGMENT                  0
--- CREATE SEQUENCE                          0
+-- CREATE SEQUENCE                          5
 -- CREATE MATERIALIZED VIEW                 0
 -- CREATE SYNONYM                           0
 -- CREATE TABLESPACE                        0

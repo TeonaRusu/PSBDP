@@ -64,7 +64,7 @@ a.button {
 			$diff = date_diff($date_checkout, $date_checkin);
 			$days = $diff->format('%a');
 			?>
-			<input id="rsv_price" class="form-control" type="text" name="RSV_PRICE" value="<?php echo $room['ROOM_PRICE'] * $days; ?>" required />
+			<input id="total" class="form-control" type="text" name="total" value="<?php echo $room['ROOM_PRICE'] * $days; ?>" required />
         </div>
     </div>
 

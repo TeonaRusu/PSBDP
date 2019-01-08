@@ -6,7 +6,7 @@ as
 begin
   open myrc for select room_number, room_type, room_price, room_details
                 from room, room_type
-                where room.roomtype_id=room_type.type_id 
+                where room.type_id=room_type.type_id 
                       and room_number not in 
                           (select room_number from reservation 
                                   where (checkin < checkin_date and checkout > checkin_date) or

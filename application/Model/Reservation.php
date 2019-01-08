@@ -8,8 +8,8 @@ class Reservation extends Model {
     function get_price($reservation_id=null)
     {
       if($reservation_id){
-        $conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
-      // $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+        //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+		$conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
         if (!$conn) {
             $e = oci_error();
             trigger_error(htmlentities($e['message']), E_USER_ERROR);
@@ -29,8 +29,8 @@ class Reservation extends Model {
       $reservations = array();
       $temp = array('' => '');
 
-      $conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
-      // $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+      //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+      $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
         if (!$conn) {
             $e = oci_error();
             trigger_error(htmlentities($e['message']), E_USER_ERROR);
@@ -59,8 +59,8 @@ class Reservation extends Model {
     {
       $reservation_details = array();
       $temp = array('' => '');
-      $conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
-      // $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+      //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+      $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
         if (!$conn) {
             $e = oci_error();
             trigger_error(htmlentities($e['message']), E_USER_ERROR);
@@ -88,8 +88,8 @@ class Reservation extends Model {
 
 function update_reservation($rsv_id, $status, $emp_id)
     {
-      $conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
-      // $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+      //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+      $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
       if (!$conn) {
           $e = oci_error();
           trigger_error(htmlentities($e['message']), E_USER_ERROR);
@@ -106,8 +106,8 @@ function update_reservation($rsv_id, $status, $emp_id)
 
 function extend_reservation($rsv_id, $checkout, $date, $status, $emp_id)
     {
-      $conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
-      // $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+      //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+      $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
       if (!$conn) {
           $e = oci_error();
           trigger_error(htmlentities($e['message']), E_USER_ERROR);
@@ -126,8 +126,8 @@ function extend_reservation($rsv_id, $checkout, $date, $status, $emp_id)
 
 function add_reservation($checkin, $checkout, $status, $cust_id, $emp_id, $room_nr)
     {
-      $conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
-      // $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+      //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+      $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
       if (!$conn) {
           $e = oci_error();
           trigger_error(htmlentities($e['message']), E_USER_ERROR);
@@ -148,8 +148,8 @@ function add_reservation($checkin, $checkout, $status, $cust_id, $emp_id, $room_
 function check_date($rsv_id, $checkout)
 	{
     $result = "";
-		$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
-		// $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+		//$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+		$conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
 		if (!$conn) {
           $e = oci_error();
           trigger_error(htmlentities($e['message']), E_USER_ERROR);

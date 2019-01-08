@@ -21,7 +21,7 @@ begin
   
   select room_price into v_room_price 
   from room_type rt, room r
-  where r.room_number = :new.room_number and r.roomtype_id = rt.type_id;
+  where r.room_number = :new.room_number and r.type_id = rt.type_id;
   
   update price
   set nr_days = v_new_days, total = v_old_price + v_room_price*v_diff_days

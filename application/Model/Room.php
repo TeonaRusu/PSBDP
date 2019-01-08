@@ -7,8 +7,8 @@ class Room extends Model {
 
 	function get_room($room_nr) {
 
-		$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
-		// $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+		//$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+		$conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
         if (!$conn) {
             $e = oci_error();
             trigger_error(htmlentities($e['message']), E_USER_ERROR);
@@ -35,8 +35,8 @@ class Room extends Model {
         $rooms = array();
         $temp = array('' => '');
 
-        $conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
-        // $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
+        //$conn = oci_connect('c##psbdp', 'psbdp', 'localhost:1521/orcl.local');  /* Roxana */
+        $conn = oci_connect('c##teona', 'teona', 'localhost:1521/orcl');    /* Teona */
         if (!$conn) {
             $e = oci_error();
             trigger_error(htmlentities($e['message']), E_USER_ERROR);

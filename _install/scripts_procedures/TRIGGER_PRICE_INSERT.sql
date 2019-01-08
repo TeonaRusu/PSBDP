@@ -9,7 +9,7 @@ begin
   v_nr_days := :new.checkout_date - :new.checkin_date;
   select room_price into v_room_price 
   from room_type rt, room r
-  where r.room_number = :new.room_number and r.roomtype_id = rt.type_id;
+  where r.room_number = :new.room_number and r.type_id = rt.type_id;
   dbms_output.put_line(v_nr_days);
   dbms_output.put_line(v_room_price);
   insert into price(price_id, rsv_id, nr_days, total)
